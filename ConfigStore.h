@@ -72,7 +72,7 @@ static bool config_load_blnkopt()
                             BLYNK_PARAM_PLACEHOLDER_64
                             BLYNK_PARAM_PLACEHOLDER_64)
     BLYNK_PARAM_KV("host" , CONFIG_DEFAULT_SERVER)
-    BLYNK_PARAM_KV("port" , BLYNK_TOSTRING(80))
+    BLYNK_PARAM_KV("port" , BLYNK_TOSTRING(CONFIG_DEFAULT_PORT))
     "\0";
 
   BlynkParam prov(blnkopt+8, sizeof(blnkopt)-8-2);
@@ -144,4 +144,3 @@ void config_set_last_error(int error) {
     config_save();
   }
 }
-

@@ -22,9 +22,6 @@ extern "C" {
 #include "ConfigMode.h"
 #include "Indicator.h"
 #include "OTA.h"
-#include "Console.h"
-
-BlynkTimer edgentTimer;
 
 inline
 void BlynkState::set(State m) {
@@ -42,6 +39,7 @@ void printDeviceBanner()
   Blynk.printBanner();
   DEBUG_PRINT("--------------------------");
   DEBUG_PRINT(String("Product:  ") + BLYNK_DEVICE_NAME);
+  DEBUG_PRINT(String("Hardware: ") + BOARD_HARDWARE_VERSION);
   DEBUG_PRINT(String("Firmware: ") + BLYNK_FIRMWARE_VERSION " (build " __DATE__ " " __TIME__ ")");
   if (configStore.getFlag(CONFIG_FLAG_VALID)) {
     DEBUG_PRINT(String("Token:    ...") + (configStore.cloudToken+28));
@@ -73,13 +71,12 @@ class Edgent {
 public:
   void begin()
   {
-    WiFi.persistent(false);
-    WiFi.enableSTA(true); // Needed to get MAC
-
     indicator_init();
     button_init();
     config_init();
-    edgentTimer.setTimeout(1000L, console_init);
+
+    WiFi.persistent(false);
+    WiFi.enableSTA(true);   // Needed to get MAC
 
     printDeviceBanner();
 
@@ -111,9 +108,8 @@ public:
 };
 
 Edgent BlynkEdgent;
+BlynkTimer timer;
 
 void app_loop() {
-    edgentTimer.run();
-    edgentConsole.run();
+    timer.run();
 }
-
