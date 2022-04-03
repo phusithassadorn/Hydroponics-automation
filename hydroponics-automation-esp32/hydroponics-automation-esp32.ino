@@ -1,31 +1,29 @@
 
+// Fill-in information from your Blynk Template here
+#define BLYNK_TEMPLATE_ID "TMPLUcUfLW6K"
+#define BLYNK_DEVICE_NAME "Hydroponics automation"
+
+#define BLYNK_FIRMWARE_VERSION        "0.1.0"
+
 #define BLYNK_PRINT Serial
-#define RELAY_PIN 14
+//#define BLYNK_DEBUG
 
-#include <WiFi.h>
-#include <WiFiClient.h>
-#include <BlynkSimpleEsp32.h>
+#define APP_DEBUG
+ 
+// Uncomment your board, or configure a custom board in Settings.h
+#define USE_WROVER_BOARD
+//#define USE_TTGO_T
 
-
-char auth[] = "YourAuthToken";
-char ssid[] = "Hassadorn_5G";
-char pass[] = "0998394346";
-
-void relaysOutput (){
-   pinMode(RELAY_PIN, OUTPUT);
-  }
+#include "BlynkEdgent.h"
 
 void setup()
-
- 
 {
+  Serial.begin(115200);
+  delay(100);
 
-Serial.begin(115200);
-
-Blynk.begin(auth, ssid, pass);
+  BlynkEdgent.begin();
 }
 
-void loop()
-{
-Blynk.run();
+void loop() {
+  BlynkEdgent.run();
 }
