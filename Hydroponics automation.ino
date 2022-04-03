@@ -1,5 +1,4 @@
 // Replace/ Fill-in information from your Blynk Template here
-
 #define BLYNK_TEMPLATE_ID "TMPLUcUfLW6K"
 #define BLYNK_DEVICE_NAME "Hydroponics automation"
 
